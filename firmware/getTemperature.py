@@ -20,14 +20,12 @@ class CEE(object):
 
 	def getValue(self):
 		data = self.dev.ctrl_transfer(0x40|0x80, 0xA0, 0, 0, 2)
-		data = data[1] << 8 | data[0]
-		print hex(data)
+		degrees = (data[1] << 8 | data[0]) >> 4
+		print degrees
 
 	def blinkLED(self):
 		self.dev.ctrl_transfer(0x40|0x80, 0x73, 0, 0, 0)	
 
 if __name__ == "__main__":
 	cee = CEE()
-	while True:
-		cee.blinkLED()
-		cee.getValue()
+	cee.getValue()
