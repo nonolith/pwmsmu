@@ -1,23 +1,15 @@
-**Available for pre-order on [our Kickstarter](http://www.kickstarter.com/projects/itdaniher/cee-the-usb-analog-electronics-multi-tool)!**
 
-The CEE (control · experiment · explore) is an analog multitool. By sourcing and measuring voltage and current, the CEE opens up a world that has previously been restricted by monolithic, bulky, and hard-to-use tools. Learners can explore a wide range of concepts including everything from AC/DC electricity and resistance to work / energy, torque / speed, heat flow, and electrochemistry. As tinkerers, we've used our proof-of-concept boards as a multimeter to sort components in our junk bins, a programmable interface device to test new sensors, a power supply to fuel our breadboards, a web-based datalogger, and every possible combination therein. 
+This branch contains the development files for a USB reflow oven control board, working title "thermowut."
+
+The design shares many features with the CEE.
 
 **Features**
 
-  - tightly integrated, well documented, 100% open-source software for data analysis and real-time measurement
-  - flexible drivers offer integration with existing sensors, actuators, and software
-  - web-based user interface makes collaboration seamless and painless across Mac, Windows, and Linux, in the garage, in the lab, and at school
-  - USB powered and controlled, requiring only one cable
-  - sub-millivolt and sub-milliamp precision and accuracy
-  - two watt power output, allowing for direct use with a wide range of motors, lights, and sensors
-  - two channels, capable of sourcing and measuring up to 5V and 200mA each
-  - upgradeable to 2A current with external power supply - some soldering required
-  - 100k samples per second of voltage & current set/measurement at 12bit resolution
+  - MAX31855 K-type Thermocouple Interface, giving two-degree accuracy from +700degC to -200degC
+  - Array of Digital Control Pins
   - 32MHz RISC processor - ATXMEGA32A4U 
 
 
 Development is ongoing.
 
 All CAD files, schematics, and board layouts for this project are released under a [CC-by-SA(Share-Alike) license](http://creativecommons.org/licenses/by-sa/3.0/).
-
-Our bill of materials is in constant flux and can be accessed from http://bit.ly/CEEBOM.

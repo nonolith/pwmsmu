@@ -118,7 +118,6 @@ include $(USB_PATH)/makefile
 SRC += $(SRC_USB)
 SRC += main.c
 SRC += Descriptors.c
-SRC += packetbuffer.c
 
 # List C++ source files here. (C dependencies are automatically generated.)
 CPPSRC =
