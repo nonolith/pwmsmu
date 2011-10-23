@@ -1,13 +1,6 @@
 import usb.core
 
-MODE_DISABLED=0
-MODE_SVMI=1
-MODE_SIMV=2
-
-def unpackSign(n):
-	return n - (1<<12) if n>2048 else n
-
-class CEE(object):
+class Thermowut(object):
 	def __init__(self):
 		self.init()
 
@@ -19,13 +12,13 @@ class CEE(object):
 		self.dev.set_configuration()
 
 	def getValue(self):
-		data = self.dev.ctrl_transfer(0x40|0x80, 0xA0, 0, 0, 2)
-		degrees = (data[1] << 8 | data[0]) >> 4
-		print degrees
+		data = self.dev.ctrl_transfer(0x40|0x80, 0xA0, 0, 0, 4)
+		print unpackSign((data[2] << 8 | data[3]) >> 4)
 
-	def blinkLED(self):
+	def toggleLED(self):
 		self.dev.ctrl_transfer(0x40|0x80, 0x73, 0, 0, 0)	
 
 if __name__ == "__main__":
-	cee = CEE()
-	cee.getValue()
+	thermowut = Thermowut()
+	while True:
+		thermowut.getValue()
