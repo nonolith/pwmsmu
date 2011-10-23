@@ -45,10 +45,20 @@ void readSPI(void){
 	ep0_buf_in[0] = USARTE0.DATA;
 
 	USARTE0.DATA = 0x00;
-	while(!(USARTE0.STATUS & USART_TXCIF_bm)); // wait for TX complete flag
+	while(!(USARTE0.STATUS & USART_DREIF_bm)); // wait for TX complete flag
 	USARTE0.STATUS = USART_TXCIF_bm;
 	ep0_buf_in[1] = USARTE0.DATA;
 	
+	USARTE0.DATA = 0x00;
+	while(!(USARTE0.STATUS & USART_DREIF_bm)); // wait for TX complete flag
+	USARTE0.STATUS = USART_TXCIF_bm;
+	ep0_buf_in[2] = USARTE0.DATA;
+	
+	USARTE0.DATA = 0x00;
+	while(!(USARTE0.STATUS & USART_DREIF_bm)); // wait for TX complete flag
+	USARTE0.STATUS = USART_TXCIF_bm;
+	ep0_buf_in[3] = USARTE0.DATA;
+	_delay_us(50);	
 	PORTE.OUTSET = 1 << 0; // CS high
 }
 
@@ -65,7 +75,7 @@ bool EVENT_USB_Device_ControlRequest(USB_Request_Header_t* req){
 		switch(req->bRequest){
 			case 0xA0: // read MAX31855
 				readSPI();
-				USB_ep0_send(2);
+				USB_ep0_send(4);
 				break;
 			case 0x73: // toggle LED
 				PORTB.OUTTGL = 1 << 2;
