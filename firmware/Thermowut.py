@@ -1,6 +1,8 @@
 import usb.core
 
 class Thermowut(object):
+	unTwos = lambda self, n: n - (1<<12) if n>2048 else n   
+
 	def __init__(self):
 		self.init()
 
@@ -13,7 +15,7 @@ class Thermowut(object):
 
 	def getValue(self):
 		data = self.dev.ctrl_transfer(0x40|0x80, 0xA0, 0, 0, 4)
-		print unpackSign((data[2] << 8 | data[3]) >> 4)
+		return self.unTwos((data[2] << 8 | data[3]) >> 4)
 
 	def toggleLED(self):
 		self.dev.ctrl_transfer(0x40|0x80, 0x73, 0, 0, 0)	
