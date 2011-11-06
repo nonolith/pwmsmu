@@ -1,12 +1,11 @@
-
-This branch contains the development files for a USB reflow oven control board, working title "thermowut."
+This branch contains the development files for a USB themperature controller. 
 
 **Features**
 
-  - AD8495 analog thermocouple interface 
-  - array of digital control pins
-  - 32MHz RISC processor w/ onboard 12b ADC - ATXMEGA32A4U 
-
+  - AD8495 analog thermocouple interface or MAX31855 digital thermocouple interface
+  - 4 buffered digital control pins
+  - industry standard k-type thermocouple connector
+  - 32MHz RISC processor w/ onboard 12b ADC - ATXMEGA32A4U
 
 Development is ongoing.
 
