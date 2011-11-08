@@ -17,7 +17,6 @@ bool EVENT_USB_Device_ControlRequest(USB_Request_Header_t* req);
 int main(void){
 	configHardware();
 	sei();	
-
 	while (1){
 			USB_Task(); // Lower-priority USB polling, like control requests
 	}
@@ -26,8 +25,8 @@ int main(void){
 /* Configure the ADC to 12b, differential w/ gain, signed mode with a 2.5VREF. */
 void initADC(void){
     ADCA.CTRLB = ADC_RESOLUTION_12BIT_gc | 1 << ADC_CONMODE_bp | 0 << ADC_IMPMODE_bp | ADC_CURRLIMIT_NO_gc | ADC_FREERUN_bm;
-//    ADCA.REFCTRL = ADC_REFSEL_AREFA_gc; // use 2.5VREF at AREFA
-    ADCA.REFCTRL = ADC_REFSEL_INT1V_gc | ADC_TEMPREF_bm; // use 1V internal ref, enable internal reference
+	ADCA.REFCTRL = ADC_REFSEL_INT1V_gc | ADC_TEMPREF_bm; // use 1V internal ref, enable internal reference
+//    ADCA.REFCTRL = ADC_REFSEL_AREFA_gc | ADC_TEMPREF_bm; // use 2.5VREF at AREFA
     ADCA.PRESCALER = ADC_PRESCALER_DIV64_gc; // ADC CLK = 500KHz
     ADCA.EVCTRL = ADC_SWEEP_012_gc ;
     ADCA.CH0.CTRL = ADC_CH_INPUTMODE_DIFFWGAIN_gc | ADC_CH_GAIN_64X_gc;
@@ -81,6 +80,7 @@ void readSPI(void){
 
 void configHardware(void){
 	initSPI();
+	initADC();
 	USB_ConfigureClock();
 	USB_Init();
 }
@@ -97,9 +97,9 @@ bool EVENT_USB_Device_ControlRequest(USB_Request_Header_t* req){
 
 			case 0xB0:
 				ep0_buf_in[0] = ADCA.CH0.RESH; // thermocouple
-				ep0_buf_in[0] = ADCA.CH0.RESL;
+				ep0_buf_in[1] = ADCA.CH0.RESL;
 				ep0_buf_in[2] = ADCA.CH2.RESH; // local temp
-				ep0_buf_in[2] = ADCA.CH2.RESL;
+				ep0_buf_in[3] = ADCA.CH2.RESL;
 				USB_ep0_send(4);
 				break;
 
