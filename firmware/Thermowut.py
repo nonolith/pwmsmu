@@ -13,14 +13,17 @@ class Thermowut(object):
 			
 		self.dev.set_configuration()
 
-	def getValue(self):
+	def getMAX31855(self):
 		data = self.dev.ctrl_transfer(0x40|0x80, 0xA0, 0, 0, 4)
 		return self.unTwos((data[2] << 8 | data[3]) >> 4)
 
-	def toggleLED(self):
-		self.dev.ctrl_transfer(0x40|0x80, 0x73, 0, 0, 0)	
+	def getTemperature(self):
+		data = self.dev.ctrl_transfer(0x40|0x80, 0xB0, 0, 0, 4)
+		return map(hex, data)
+
+	def getAmplifier(self):
+		data = self.dev.ctrl_transfer(0x40|0x80, 0xC0, 0, 0, 2)
+		return self.unTwos((data[0] << 8 | data[1]))
 
 if __name__ == "__main__":
 	thermowut = Thermowut()
-	while True:
-		thermowut.getValue()

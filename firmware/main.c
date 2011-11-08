@@ -90,8 +90,8 @@ bool EVENT_USB_Device_ControlRequest(USB_Request_Header_t* req){
 	if ((req->bmRequestType & CONTROL_REQTYPE_TYPE) == REQTYPE_VENDOR){
 		switch(req->bRequest){
 
-			case 0xA0: // read MAX31855
-				readSPI();
+			case 0xA0: 
+				readSPI(); // MAX31855
 				USB_ep0_send(4);
 				break;
 
