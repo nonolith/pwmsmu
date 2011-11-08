@@ -98,8 +98,8 @@ bool EVENT_USB_Device_ControlRequest(USB_Request_Header_t* req){
 			case 0xB0:
 				ep0_buf_in[0] = ADCA.CH0.RESH; // thermocouple
 				ep0_buf_in[1] = ADCA.CH0.RESL;
-				ep0_buf_in[2] = ADCA.CH2.RESH; // local temp
-				ep0_buf_in[3] = ADCA.CH2.RESL;
+				ep0_buf_in[2] = ADCA.CH2.RESL; // local temp
+				ep0_buf_in[3] = ADCA.CH2.RESH;
 				USB_ep0_send(4);
 				break;
 
