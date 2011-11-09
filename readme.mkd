@@ -1,11 +1,10 @@
-This branch contains the development files for a USB themperature controller. 
+This branch contains the development files for a USB power controller. 
 
 **Features**
-
-  - AD8495 analog thermocouple interface or MAX31855 digital thermocouple interface
-  - 4 buffered digital control pins
-  - industry standard k-type thermocouple connector
-  - 32MHz RISC processor w/ onboard 12b ADC - ATXMEGA32A4U
+	
+	- four half-h channels, each capable of switching up to 5a at 24v.
+	- switching speeds of up to 500KHz
+	- 1KHz current measurement with mA accuracy
 
 Development is ongoing.
 
